@@ -10,11 +10,16 @@ div.MainFrame
       p.School
        | Photon – новая школа фотографии для всех. 
        | Мы поможем вам показать красоту мира правильно! 
-       |Проходите бесплатные уроки по разным направлениям фотографии в любое время и из любого города. 
-       |После прохождения урока вы можете выполнить задание и оставить для оценки нашим преподавателем.
+       | Проходите бесплатные уроки по разным направлениям фотографии в любое время и из любого города. 
+       | После прохождения урока вы можете выполнить задание и оставить для оценки нашим преподавателем.
        | Он даст вам свои рекомендации и советы. Лучшие работы будут выставлены в галерею.
     div.FrameGallery
      span.TitleSchool Галерея
+     div.GallaryRoll
+        button
+        div.GalleryPhotos
+            img(src="@/assets/image/75.jpg")
+        button
     div.FrameCourse
      span.TitleSchool Курсы
       div.FrameCourseColums
@@ -33,12 +38,22 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
+.GallaryRoll{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.GalleryPhotos{
+    display: flex;
+    width: 80vw;
+    align-items: center;
+    justify-content: center;
+    overflow: auto;
+}
 .MainFrame{
     width: 100%;
     margin: 0 auto;
-  
 }
-
 .container {
     display:inline-block;   
     position:relative;
@@ -57,6 +72,9 @@ export default {
 .imageFrame{
     width: 100%;
     margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .TitleSchool{
     text-align: left;
@@ -72,7 +90,7 @@ export default {
 .School{
     font-family: "Inter Regular";
     color: black;
-    font-size: 1.5vw;
+    font-size: 1.8vw;
     font-family: 'Inter Regular';
     font-style: normal;
     font-weight: 400;
@@ -105,8 +123,7 @@ export default {
     z-index: -1;
 }
 .imageSchool{
-    width: 400px;
-    border: 15px solid rgba(0, 0, 0, 0.58);
+    width: 34vw;
 }
 .imgBabyCourse{
     width: 400px;
@@ -114,9 +131,8 @@ export default {
 }
 .textBoss{
     position:absolute;
-    top: 90%;
-    left:25%;
-    font-size: 9mm;
+    margin-top: 10vw;
+    font-size: 3vw;
     font-family: "Inter Regular";
     color: white;
 }
