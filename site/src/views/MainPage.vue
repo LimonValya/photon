@@ -17,7 +17,15 @@ div.MainFrame
      span.TitleSchool Галерея
     div.FrameCourse
      span.TitleSchool Курсы
-
+      div.FrameCourseColums
+      h2.School Основы фотографии
+      div
+      img(src="@/assets/image/14.jpg").imgBabyCourse
+      p.School
+       |Главное что нужно знать начинающему фотографу.
+       |Не знаете, что такое диафрагма и баланс белого?
+       |Проблемы с встроенной вспышкой? Как правильно выстроить композицию? Тогда вам сюда!
+div.
 </template>
 <script>
 export default {
@@ -29,6 +37,22 @@ export default {
     width: 100%;
     margin: 0 auto;
   
+}
+
+.container {
+    display:inline-block;   
+    position:relative;
+}
+.container div { 
+    display: none;
+    position: absolute; 
+    bottom: 10px; left: 0px; 
+    background-color: rgba(0,0,0,.4); 
+    padding: 5px 5px 5px 10px;
+    color: white
+}
+.container:hover div {
+    display: block 
 }
 .imageFrame{
     width: 100%;
@@ -70,6 +94,12 @@ export default {
   padding: 5%;
   margin: 0%;
   }
+  .FrameCourseColums{
+  padding: 5%;
+  margin: 0%;
+  column-count: 2;
+  }
+  
 .imageBoss{
     width: 100%;
     z-index: -1;
@@ -77,6 +107,10 @@ export default {
 .imageSchool{
     width: 400px;
     border: 15px solid rgba(0, 0, 0, 0.58);
+}
+.imgBabyCourse{
+    width: 400px;
+    border: 2px solid rgba(0, 0, 0, 0.58);
 }
 .textBoss{
     position:absolute;
