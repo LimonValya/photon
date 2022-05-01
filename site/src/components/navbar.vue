@@ -2,7 +2,6 @@
 div.MainFrame
     button.btnMainLogo Photon
     div.menuGroup <!-- -->
-        button.btnMain Галерея
         button.btnMain Курсы
         button(@click="goAuth()").btnSignUp Вход
 authModal(v-show="authmodal == true" @authmodal="goAuth()").authcomp
