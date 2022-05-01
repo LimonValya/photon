@@ -48,7 +48,7 @@ margin-right: 100px;
 
 .imageFrame{
     width: 100%;
-    margin: 0 auto;
+    margin: 0.2%;
     display: flex;
     align-items: center;
     justify-content: center;

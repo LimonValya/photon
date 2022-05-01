@@ -1,53 +1,45 @@
 <template lang="pug">
 div.MainFrame
   div(v-show="delItems == true").addStyle
-    div.MainFrameItems
+    div.MainFrameItems <!-- модальное окно удаления урока -->
       div.delItems
         div.titleAdd
           button(@click="delItems = !delItems").btnAddBack ✖
         div.spanAdd
-          span Удалить позицию меню
+          span Удалить урок
         div.inputAdd
           span Название
           input.inputStyle(type="name" v-model="item.name")
         div.spanTitle
-          span.spanERR1.spanERR(v-show="validation.dataErr1 == true") Данной позиции нет в меню
+          span.spanERR1.spanERR(v-show="validation.dataErr1 == true") Данного урока нет в курсе
           span.spanOK1.spanOK(v-show="validation.dataOk1 == true") Успешно
         div.spanDell.spanAdd
           button.sendBtn(@click='delMethod()') Удалить
   div(v-show="addItems == true").addStyle
-    div.MainFrameItems
+    div.MainFrameItems <!--модальное окно добавления  -->
       div.addItems
         div.titleAdd
           button(@click="addItems = !addItems").btnAddBack ✖
         div.spanAdd
-          span Добавить позицию меню
+          span Добавить урок
         div.inputAdd
           span Название
           input.inputStyle(type="name" v-model="item.name")
         div.inputAdd
-          span Количество
-          input.inputStyle(type="amount" v-model="item.amount")
-        div.inputAdd
          
         div.selectCategor.inputAdd
-          span Выберите категорию
+          span Выберите курс
           input.inputStyle(type="category" v-model="item.category")
-        div.inputAdd
-          span Цена
-          input.inputStyle(type="price" v-model="item.price")
-        div.inputAdd
-          span Состав
-          input.inputStyle(type="discription" v-model="item.discription")
         div.spanTitle
           span.spanERR(v-show="validation.dataErr == true") Ошибка 
           span.spanOK(v-show="validation.dataOk == true") Успешно
         div.spanAdd 
           button.sendBtn(@click='addMethod()') Сохранить     
   div.add
-    button.addBtn(@click="addItems = !addItems") Добавить новую позицию меню
+    button.addBtn(@click="addItems = !addItems") Добавить новый курс
+    button.addBtn(@click="addItems = !addItems") Добавить новый урок
   div.del
-    button.delBtn.addBtn(@click="delItems = !delItems") Удалить позицию меню
+    button.delBtn.addBtn(@click="delItems = !delItems") Удалить урок
 
 
 </template>
@@ -68,10 +60,6 @@ export default {
       },
     item: {
         name: "",
-        amount: "",
-        weight: "",
-        category: "",
-        price: "",
         discription: "",
       },
     }
@@ -139,13 +127,11 @@ computed: {
     color: rgb(86, 255, 94);
   font-size: clamp(15px, 1vw, 20px);
 }
-.MainFrame {
-  font-family: "Inter Regular";
-  display: flex;
-  justify-content: space-between;
-  margin: 1vw;
-  flex-direction: column;
+.MainFrame{
+    width: 100%;
+    margin: 0;
 }
+
 .addStyle{
     position: fixed; /* фиксированное положение */
     top: 0;
@@ -239,7 +225,7 @@ computed: {
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 10px;
-  background: #fe785b;
+  background: #214CCF;
   color: white;
 }
 </style>

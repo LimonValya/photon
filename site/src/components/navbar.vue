@@ -67,6 +67,6 @@ export default {
 .MainFrame{
     display: flex;
     justify-content: space-between;
-    margin: 1.5vw;
+    
 }
 </style>
