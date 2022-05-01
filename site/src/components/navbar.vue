@@ -2,9 +2,13 @@
 div.MainFrame
     button.btnMainLogo Photon
     div.menuGroup <!-- -->
+        button.btnMain(@click="this.$router.push('/Admin')") Администратор
         button.btnMain Курсы
         button(@click="goAuth()").btnSignUp Вход
 authModal(v-show="authmodal == true" @authmodal="goAuth()").authcomp
+         div.lkOutDiv
+              span(v-show="authed == true").lkStyle {{profileName}}
+              button.lkOut(@click="exitMethod()") Выход
 </template>
 <script>
 import authModal from "@/components/authcomponent.vue"

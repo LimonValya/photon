@@ -119,6 +119,7 @@ export default {
       this.$store.commit("auth/authExit", false);
       this.$store.commit("auth/updateName", profileName);
     },
+     
   },
   computed: {
     ...mapState({
