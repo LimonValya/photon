@@ -1,45 +1,44 @@
 <template lang="pug">
 div.MainFrame
-  div(v-show="delItems == true").addStyle
-    div.MainFrameItems <!-- модальное окно удаления урока -->
-      div.delItems
+  div(v-show="delCourse == true").addStyle
+    div.MainFrameCourse <!-- модальное окно удаления урока -->
+      div.delCourse
         div.titleAdd
-          button(@click="delItems = !delItems").btnAddBack ✖
+          button(@click="delCourse = !delCourse").btnAddBack ✖
         div.spanAdd
           span Удалить урок
         div.inputAdd
           span Название
-          input.inputStyle(type="name" v-model="item.name")
+          input.inputStyle(type="name" v-model="course.name")
         div.spanTitle
           span.spanERR1.spanERR(v-show="validation.dataErr1 == true") Данного урока нет в курсе
           span.spanOK1.spanOK(v-show="validation.dataOk1 == true") Успешно
         div.spanDell.spanAdd
           button.sendBtn(@click='delMethod()') Удалить
-  div(v-show="addItems == true").addStyle
-    div.MainFrameItems <!--модальное окно добавления  -->
-      div.addItems
+  div(v-show="addCourse == true").addStyle
+    div.MainFrameCourse <!--модальное окно добавления  -->
+      div.addCourse
         div.titleAdd
-          button(@click="addItems = !addItems").btnAddBack ✖
+          button(@click="addCourse = !addCourse").btnAddBack ✖
         div.spanAdd
           span Добавить урок
         div.inputAdd
           span Название
-          input.inputStyle(type="name" v-model="item.name")
+          input.inputStyle(type="name" v-model="course.name")
         div.inputAdd
-         
         div.selectCategor.inputAdd
           span Выберите курс
-          input.inputStyle(type="category" v-model="item.category")
+          input.inputStyle(type="category" v-model="course.category")
         div.spanTitle
           span.spanERR(v-show="validation.dataErr == true") Ошибка 
           span.spanOK(v-show="validation.dataOk == true") Успешно
         div.spanAdd 
           button.sendBtn(@click='addMethod()') Сохранить     
   div.add
-    button.addBtn(@click="addItems = !addItems") Добавить новый курс
-    button.addBtn(@click="addItems = !addItems") Добавить новый урок
+    button.addBtn(@click="addCourse = !addCourse") Добавить новый курс
+    button.addBtn(@click="addCourse = !addCourse") Добавить новый урок
   div.del
-    button.delBtn.addBtn(@click="delItems = !delItems") Удалить урок
+    button.delBtn.addBtn(@click="delCourse = !delCourse") Удалить урок
 
 
 </template>
@@ -49,8 +48,8 @@ export default {
     data() {
     return {
     a: false,
-    addItems: false,
-    delItems: false,
+    addCourse: false,
+    delCourse: false,
     selected: "",
     validation: {
         dataErr: false,
@@ -58,26 +57,22 @@ export default {
         dataErr1: false,
         dataOk1: false,
       },
-    item: {
+    course: {
         name: "",
-        discription: "",
+        text: "",
       },
     }
 },
 methods: {
     async addMethod(){
-      const response = await fetch("auth/addItems", {
+      const response = await fetch("auth/addCourse", {
         method: "POST",
          headers: {"Content-Type": "application/json",
                   "Authorization": `Bearer ${this.token}`
                   },
          body: JSON.stringify({
-           name: this.item.name,
-           amount: this.item.amount,
-           weight: this.item.weight,
-           category: this.item.category,
-           price: this.item.price,
-           discription: this.item.discription,
+           name: this.course.name,
+           text: this.course.text,
       }),        
     })
     if(response.status == 400){
@@ -88,13 +83,13 @@ methods: {
         }
     },
     async delMethod(){
-      const response = await fetch("auth/delItems", {
+      const response = await fetch("auth/delCourse", {
         method: "POST",
          headers: {"Content-Type": "application/json",
                   "Authorization": `Bearer ${this.token}`
                   },
          body: JSON.stringify({
-           name: this.item.name,
+           name: this.course.name,
       }),        
     })
     if(response.status == 400 || response.status == 404){
@@ -150,7 +145,7 @@ computed: {
 	  pointer-events: auto; /* элемент видим для событий мыши */
     overflow-y: auto;
 }
-.MainFrameItems{
+.MainFrameCourse{
     position: relative;
     display: -webkit-box;
     display: -webkit-flex;
@@ -169,7 +164,7 @@ computed: {
     align-items: center;
     justify-content: center;
 }
-.addItems{
+.addCourse{
     background: white;
     display: flex;
     flex-direction: column;
@@ -178,7 +173,7 @@ computed: {
     border-radius: 1vw;
     justify-content: space-between;
   }
-.delItems{
+.delCourse{
     background: white;
     display: flex;
     flex-direction: column;

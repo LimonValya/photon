@@ -21,6 +21,7 @@ div.MainFrame
          |Главное что нужно знать начинающему фотографу.
          |Не знаете, что такое диафрагма и баланс белого?
          |Проблемы с встроенной вспышкой? Как правильно выстроить композицию? Тогда вам сюда!
+       button(@click="goAuth()").btnSignUp Читать далее
        
 </template>
 
@@ -37,6 +38,20 @@ div.MainFrame
 .MainFrame{
     width: 100%;
     margin: 0 auto;
+}
+.btnSignUp {
+  margin: 0px 17px 0px 17px;
+  border: none;
+  padding: 0.8vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-radius: 10px;
+  background: #214CCF;
+  color: white;
+  font-size: clamp(14px, 1vw, 98px);
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 600;
 }
 .columnCourse
 {

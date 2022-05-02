@@ -267,9 +267,7 @@ export default {
   pointer-events: auto; /* элемент видим для событий мыши */
   overflow-y: auto; /* добавляем прокрутку по y, когда элемент не помещается на страницу */
 }
-.cartStyle {
-  width: clamp(38px, 2vw, 98px);
-}
+
 .buttonGroup {
   display: flex;
   align-items: center;
