@@ -26,8 +26,10 @@ div.MainFrame
           span Название
           input.inputStyle(type="name" v-model="course.name")
         div.inputAdd
+          span Текст
+          textarea.inputStyle(type="text" v-model="course.text")
         div.selectCategor.inputAdd
-          span Выберите курс
+          span Выберите урок
           input.inputStyle(type="category" v-model="course.category")
         div.spanTitle
           span.spanERR(v-show="validation.dataErr == true") Ошибка 
@@ -35,7 +37,6 @@ div.MainFrame
         div.spanAdd 
           button.sendBtn(@click='addMethod()') Сохранить     
   div.add
-    button.addBtn(@click="addCourse = !addCourse") Добавить новый курс
     button.addBtn(@click="addCourse = !addCourse") Добавить новый урок
   div.del
     button.delBtn.addBtn(@click="delCourse = !delCourse") Удалить урок
@@ -108,6 +109,21 @@ computed: {
 }
 </script>
 <style>
+.addBtn{
+  margin: 10px 10px 10px 10px;
+  text-align: center;
+  border: none;
+  padding: 0.8vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-radius: 10px;
+  background: #214CCF;
+  color: white;
+  font-size: 0.5 vw;
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 400;
+}
 .spanTitle{
   display: flex;
   justify-content: center;
@@ -135,8 +151,6 @@ computed: {
     left: 0;
     background: rgba(0,0,0,0.5); /* цвет фона */
     z-index: 1050;
-    -webkit-transition: opacity 200ms ease-in; 
-    -moz-transition: opacity 200ms ease-in;
     transition: opacity 200ms ease-in; /* анимация перехода */
     pointer-events: none; /* элемент невидим для событий мыши */
     margin: 0;
@@ -151,12 +165,9 @@ computed: {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
+   
     flex-direction: column;
-    -webkit-background-clip: padding-box;
+  
     background-clip: padding-box;
     outline: 0;
     width: 100vw;

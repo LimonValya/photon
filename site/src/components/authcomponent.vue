@@ -42,6 +42,7 @@ div.authStyle
             span.spanOK(v-show="validation.dataOK == true") Регистрация успешна
           div.spanTitle2.spanTitle.buttonReg
             button.RegisBtn(@click='regMethods()').authBtn Зарегистрироваться
+            
     </template>
 <script>
 import {mapState} from "vuex"
@@ -112,13 +113,7 @@ export default {
     authmodal(){
             this.$emit("authmodal",true)
         },
-    exitMethod() {
-      const token = "";
-      const profileName = "";
-      this.$store.commit("auth/newToken", token);
-      this.$store.commit("auth/authExit", false);
-      this.$store.commit("auth/updateName", profileName);
-    },
+   
      
   },
   computed: {
@@ -337,4 +332,13 @@ export default {
   margin: 1vw;
   flex-direction: column;
 }
+.lkOutDiv:hover > .lkOut{
+  display: inherit;
+  }
+  .lkOutDiv{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
 </style>

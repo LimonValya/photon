@@ -2,6 +2,8 @@ export const authModule = {
     state: () => ({
     authed: false,
     token: "",
+    profileName: "",
+    profileRole: "",
     }),
     mutations: {
     authExit(state, exit){

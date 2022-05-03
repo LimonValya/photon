@@ -7,9 +7,10 @@ div.MainFrame
         button.btnMain Курсы
         button(@click="goAuth()").btnSignUp Вход
 authModal(v-show="authmodal == true" @authmodal="goAuth()").authcomp
-         div.lkOutDiv
-              span(v-show="authed == true").lkStyle {{profileName}}
-              button.lkOut(@click="exitMethod()") Выход
+        div.lkOutDiv
+         span(v-show="authed == true").lkStyle {{profileName}}
+        button.lkOut(@click="exitMethod()") Выход
+             
 </template>
 <script>
 import authModal from "@/components/authcomponent.vue"
@@ -23,7 +24,14 @@ export default {
     methods: {
         goAuth(){
             this.authmodal=!this.authmodal
-        }
+        },
+        exitMethod(){
+      const token = ""
+      const profileName = ""
+      this.$store.commit('auth/newToken', token)
+      this.$store.commit('auth/authExit', false)
+      this.$store.commit('auth/updateName', profileName)
+    },
     },
     components: {
         authModal
@@ -70,5 +78,24 @@ export default {
     display: flex;
     justify-content: space-between;
     
+}
+.lkOutDiv:hover > .lkOut{
+  display: inherit;
+  }
+  .lkOutDiv{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+.lkOut{
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 1vw;
+    font-size: 0.8vw;
+    border: none;
+    background:#214CCF;
+    color: white;
+    font-family: 'Inter Regular';
 }
 </style>

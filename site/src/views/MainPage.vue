@@ -53,14 +53,6 @@ div.MainFrame
   font-style: normal;
   font-weight: 600;
 }
-.columnCourse
-{
-background: #C7E3E4; 
-left: 0;
-right: 50%; 
-margin-right: 100px;
-}
-
 .imageFrame{
     width: 100%;
     margin: 0.2%;
