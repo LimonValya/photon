@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import MainPage from "@/views/MainPage.vue"
 import AdminPage from "@/views/AdminPage.vue"
+import CoursePage from "@/views/CoursePage.vue"
 const routes = [
   {
     path: '/',
@@ -11,7 +12,13 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: AdminPage
+  },
+  {
+    path: '/course',
+    name: 'course',
+    component: CoursePage
   }
+
 ]
 
 const router = createRouter({

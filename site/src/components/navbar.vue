@@ -2,7 +2,8 @@
 div.MainFrame
     button.btnMainLogo Photon
     div.menuGroup <!-- -->
-        button.btnMain(@click="this.$router.push('/Admin')") Администратор
+        div.btnMain(v-if="adminBut== false" roles="USER")
+        button.btnMain(v-else="adminBut== true" roles="ADMIN" @click="this.$router.push('/Admin')") Администратор
         button.btnMain Курсы
         button(@click="goAuth()").btnSignUp Вход
 authModal(v-show="authmodal == true" @authmodal="goAuth()").authcomp
@@ -16,6 +17,7 @@ export default {
     data(){
         return{
             authmodal:false,
+            adminBut:true,
         };
     },
     methods: {
