@@ -1,16 +1,10 @@
 const Course = require('./models/Course')
-const {validationResult} = require('express-validator')
-const { default: Course } = require('./models/Course')
 
 class CourseController {
     async addCourse(req, res){
         try {
             const {name, text, img} = req.body
-            const valerror = validationResult(req)
-            if(!valerror.isEmpty()){
-                return res.status(400).json({message: "Название не может быть пустым"})
-            }
-            const Course = new Course({name, text, img})
+            const Course = new Course({name, description, img, lessons})
             await Course.save()
             return res.status(200).json({message:"Успешно"})
         } catch (error) {

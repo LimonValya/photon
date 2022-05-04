@@ -7,6 +7,7 @@ const authRouter = require('./authRouter')
 
 app.use(express.json())
 app.use(express.urlencoded())
+app.use('/uploads', express.static('uploads'))
 app.use('/auth', authRouter)
 // app.use('/storage', storageRouter)
 // app.use('/prodacc', prodAccRouter)

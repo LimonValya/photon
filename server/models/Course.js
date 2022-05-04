@@ -1,10 +1,10 @@
-import { Schema, model } from 'mongoose'
+const{Schema,model}= require('mongoose')
 
 const Course = new Schema({
     name: {type: String, required:true},
-    text: {type: String, required:true},
+    description: {type: String, required:true},
     img: {type:String, default: 0},
-    comments: {type: Object, required:true},
+    lessons: [{type: Object, ref:'Lesson'}],
 })
 
-export default model('Course', Course)
+module.exports= model('Course', Course)
