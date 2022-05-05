@@ -1,0 +1,139 @@
+<template lang="pug">
+div.MainFrame
+  span.TitleLesson Курс: Основы фотографии
+  div.MainFrameLesson
+    div.lessonFrame
+        span.lessonName 1 урок. Устройство цифровой фотокамеры
+        div.lessonFrameText
+            p.LessonText
+            |jjghjguguiguiguiguigyuigyuyguygu
+            |vghvyuvjvgbgjbhjbjbkk
+            |jbjgkgkikjhk;hyiu
+            |fxgdxjtrdgtdctgcdtyc
+            |mkdknkenvkenvkeklvjekrvnjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+            |jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
+            
+    div.lessonFrame2.lessonFrame 
+      div.lessonFrameImg
+      img(src="@/assets/image/14.jpg").lessonImg
+  div.lessonFrame3
+    span.TitleComments Комментарии
+    textarea.inputStyle(type="text" v-model="lesson.comments.text")
+
+
+</template>
+<script>
+import {mapState} from "vuex"
+export default {
+  data(){
+    return {
+      lesson: {
+        comments: [
+        { username:"", 
+        text:"" }
+    ],
+      }
+      
+    }
+  },computed: {
+    ...mapState({
+      token: (state) => state.auth.token,
+    }),
+  },
+}
+</script>
+<style scoped>
+.TitleComments{
+  text-align: left;
+  vertical-align: top;
+  font-family: "Inter Regular";
+  color: #214ccf;
+  font-size: 2vw;
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 400;
+  padding: 1%;
+}
+.Comments{
+  width: 95%;
+  height: 20%;
+  margin-top: 1%;
+  outline: 2px solid #000;
+  border-radius: 1vw;
+  display: flex;
+  gap: 1vw;
+  align-items:center;
+}
+.commetsFrame{
+  width: 95%;
+  margin-top: 1%;
+  border-radius: 0.2vw;
+  display: flex;
+  gap: 1vw;
+  align-items:center;
+}
+.lessonImg {
+  width: 34vw;
+  flex-direction: column;
+  padding: 4%;
+}
+.commentsName{
+  font-family: "Inter Regular";
+    color: black;
+    font-size: 1.2vw;
+    font-family: 'Inter Regular';
+    font-style: normal;
+    font-weight: 400;
+}
+.TitleLesson {
+  text-align: left;
+  vertical-align: top;
+  font-family: "Inter Regular";
+  color: #214ccf;
+  font-size: 2vw;
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 400;
+  padding: 3%;
+}
+.lessonFrameText {
+  width: auto;
+  flex-direction: column;
+  display: flex;
+}
+.lessonName {
+  font-family: "Inter Regular";
+  color: black;
+  font-size: 1.8vw;
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 400;
+}
+.MainFrameLesson {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  background-clip: padding-box;
+  align-items: center;
+  justify-self: flex-start;
+}
+.lessonFrame {
+  flex-direction: column;
+  display: flex;
+  align-items: center;
+}
+.lessonFrame3 {
+  flex-direction: column;
+  display: flex;
+  height: 100vh;
+}
+.LessonText {
+  font-family: "Inter Regular";
+  color: white;
+  font-size: 1vw;
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 400;
+  flex-direction: column;
+}
+</style>
