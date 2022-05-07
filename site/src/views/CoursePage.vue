@@ -4,11 +4,8 @@ div.MainFrame
   div.MainFrameCourse
     div.courseFrame
       div.NameCourse
-      span.courseName Основы фотографии
-      p.School
-         |Главное что нужно знать начинающему фотографу.
-         |Не знаете, что такое диафрагма и баланс белого?
-         |Проблемы с встроенной вспышкой? Как правильно выстроить композицию? Тогда вам сюда!
+      span.courseName {{course.name}}
+      p.School {{course.description}}
       button(@click="this.$router.push('/lesson')").btnSignUp Читать далее
   
 

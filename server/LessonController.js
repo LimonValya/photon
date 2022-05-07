@@ -9,7 +9,7 @@ class LessonController {
                 usernameCreate: req.body.usernameCreate,
                 lessonName: req.body.lessonName,
                 text:  req.body.text,
-                img: req.files , //.map(file => file.path),
+                img: req.files , 
             })
             const findDableLessonName = req.body.lessonName
             const findDableLesson = await Lesson.findOne({lessonName: findDableLessonName})
@@ -62,7 +62,7 @@ class LessonController {
             const getlessons = await Lesson.find()
             return res.status(200).json(getlessons)
         } catch (error) {
-            return res.status(400).json({message:"Ошибка удаления"})
+            return res.status(400).json({message:"Ошибка получения"})
         }
     }
 }

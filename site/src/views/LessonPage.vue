@@ -1,24 +1,21 @@
 <template lang="pug">
 div.MainFrame
-  span.TitleLesson Курс: Основы фотографии
+  span.TitleLesson Курс: {{course.name}}
   div.MainFrameLesson
     div.lessonFrame
-        span.lessonName 1 урок. Устройство цифровой фотокамеры
+        span.lessonName {{lesson.lessonName}}
         div.lessonFrameText
-            p.LessonText
-            |jjghjguguiguiguiguigyuigyuyguygu
-            |vghvyuvjvgbgjbhjbjbkk
-            |jbjgkgkikjhk;hyiu
-            |fxgdxjtrdgtdctgcdtyc
-            |mkdknkenvkenvkeklvjekrvnjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-            |jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-            
+            p.LessonText {{lesson.text}}
     div.lessonFrame2.lessonFrame 
       div.lessonFrameImg
-      img(src="@/assets/image/14.jpg").lessonImg
+      img(:src="require(`@/assets/${lesson.lessonName}.jpg`)").lessonImg
   div.lessonFrame3
     span.TitleComments Комментарии
     textarea.inputStyle(type="text" v-model="lesson.comments.text")
+    div.CommentsFrame
+    span.NameComments {{lesson.comments.username}}
+    text.commentsText {{lesson.comments.text}}
+
 
 
 </template>
@@ -28,6 +25,9 @@ export default {
   data(){
     return {
       lesson: {
+        lessonName:"",
+        text: [],
+        img: [],
         comments: [
         { username:"", 
         text:"" }
@@ -43,6 +43,38 @@ export default {
 }
 </script>
 <style scoped>
+.btnSignUp {
+  margin: 10px 17px 0px 17px;
+  border: none;
+  padding: 0.8vw;
+  padding-left: 1vw;
+  padding-right: 1vw;
+  border-radius: 10px;
+  background: #214CCF;
+  color: white;
+  font-size: clamp(14px, 1vw, 98px);
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 600;
+}
+
+.commentsText {
+  width: auto;
+  flex-direction: column;
+  display: flex;
+  padding-left: 1%;
+}
+.NameComments{
+  text-align: left;
+  vertical-align: top;
+  font-family: "Inter Regular";
+  color: #214ccf;
+  font-size: 1.5vw;
+  font-family: "Inter Regular";
+  font-style: normal;
+  font-weight: 400;
+  padding: 1%;
+}
 .TitleComments{
   text-align: left;
   vertical-align: top;

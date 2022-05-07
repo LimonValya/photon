@@ -44,9 +44,7 @@ div.MainFrame
           input.inputStyle(type="name" v-model="course.name")
         div.inputAdd
           span Описание
-          textarea.inputStyle(type="text" v-model="course.text")
-        div.inputAdd
-          span Изображение <!-- функция formdata  -->
+          textarea.inputStyle(type="text" v-model="course.description")
         div.spanTitle
           span.spanERR(v-show="validation.dataErr == true") Ошибка 
           span.spanOK(v-show="validation.dataOk == true") Успешно
@@ -54,7 +52,7 @@ div.MainFrame
           button.sendBtn(@click='addMethod()') Сохранить     
    
   div(v-show="createLesson == true").addStyle
-    div.MainFrameCourse <!--модальное окно добавления курса  -->
+    div.MainFrameCourse <!--модальное окно добавления урока  -->
       div.createLesson
         div.titleAdd
           button(@click="createLesson = !createLesson").btnAddBack ✖
@@ -68,15 +66,16 @@ div.MainFrame
           textarea.inputStyle(type="text" v-model="lesson.text")
         div.inputAdd
           span Изображения <!-- функция formdata  -->
+          input(type="file"  accept="image/*") 
         div.spanTitle
           span.spanERR(v-show="validation.dataErr == true") Ошибка 
           span.spanOK(v-show="validation.dataOk == true") Успешно
         div.spanAdd 
-          button.sendBtn(@click='addMethod()') Сохранить     
+          button.sendBtn(@click='createLessonK()') Сохранить     
   div.add
     button.addBtn(@click="addCourse = !addCourse") Добавить курс
   div.del
-    button.delBtn.addBtn(@click="delCourse = !delCourse") Удалить курс <!-- в сервере нет этой функции -->
+    button.delBtn.addBtn(@click="delCourse = !delCourse") Удалить курс 
   div.add
     button.addBtn(@click="createLesson = !createLesson") Добавить урок
   div.del
@@ -115,6 +114,20 @@ export default {
     };
   },
   methods: {
+    async createLessonK(){
+      const formData = new FormData()
+      formData.append('usernameCreate', "profileName")
+      formData.append('lessonName', this.lesson.lessonName)
+      formData.append('text', this.lesson.text)
+      formData.append('img', this.lesson.img)
+      const response = await fetch("auth/createlesson", {
+        method: "POST",
+        headers: {
+          "Authorization": `Bearer ${this.token}`,
+        },
+        body: formData
+      });
+    },
     async addMethod() {
       const response = await fetch("auth/addCourse", {
         method: "POST",
@@ -154,6 +167,7 @@ export default {
   computed: {
     ...mapState({
       token: (state) => state.auth.token,
+      profileName: (state) => state.auth.profileName
     }),
   },
 };
