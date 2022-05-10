@@ -102,6 +102,7 @@ export default {
         const token = resJson.token;
         this.$store.commit("auth/newToken", token);
         this.$store.commit("auth/authExit", true);
+        this.$store.commit("auth/updateName", resJson.username)
         this.$emit("authmodal",true)
         this.loginIN = !this.loginIN;
       }

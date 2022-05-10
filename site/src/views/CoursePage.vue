@@ -7,13 +7,11 @@ div.MainFrame
       span.courseName {{course.name}}
       p.School {{course.description}}
       button(@click="this.$router.push('/lesson')").btnSignUp Читать далее
-  
-
-
 </template>
 <script>
 import {mapState} from "vuex"
 export default {
+  
   data(){
     return {
       course: {

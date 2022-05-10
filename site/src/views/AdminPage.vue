@@ -60,13 +60,17 @@ div.MainFrame
           span Добавить урок
         div.inputAdd
           span Название урока
-          input.inputStyle(type="name" v-model="lesson.name")
-        div.inputAdd
-          span Текст
-          textarea.inputStyle(type="text" v-model="lesson.text")
+          input.inputStyle(type="name" v-model="lesson.lessonName")
+        div.text-area-div
+          div.inputAdd(v-for="(item,index) in textareacount")
+            span Текст {{index+1}}
+            textarea.inputStyle(type="text" v-model="lesson.text[index]").text-area-styel
+        div.text-btn-adder
+          button(@click="this.textareacount+=1") +
+          button(@click="this.textareacount-=1") -
         div.inputAdd
           span Изображения <!-- функция formdata  -->
-          input(type="file"  accept="image/*") 
+          input(type="file" ref="file" multiple accept="image/*")
         div.spanTitle
           span.spanERR(v-show="validation.dataErr == true") Ошибка 
           span.spanOK(v-show="validation.dataOk == true") Успешно
@@ -85,9 +89,25 @@ div.MainFrame
 </template>
 <script>
 import { mapState } from "vuex";
+import { ref} from "vue"
 export default {
+  setup(){
+        {
+        const file = ref(null)
+
+        const handleFileUpload = async() => {
+           // debugger;
+            console.log("selected file",file.value.files)
+        }
+        return {
+          handleFileUpload,
+          file
+       }
+        }
+    },
   data() {
     return {
+      textareacount: 1,
       a: false,
       addCourse: false,
       delCourse: false,
@@ -118,8 +138,13 @@ export default {
       const formData = new FormData()
       formData.append('usernameCreate', "profileName")
       formData.append('lessonName', this.lesson.lessonName)
-      formData.append('text', this.lesson.text)
-      formData.append('img', this.lesson.img)
+      const arraylength = this.lesson.text.length
+      for(let i=0; i<arraylength; i++){
+        formData.append('text', this.lesson.text[i])
+      }
+      for(let i=0; i<this.$refs.file.files.length; i++){
+        formData.append('img', this.$refs.file.files[i])
+      }
       const response = await fetch("auth/createlesson", {
         method: "POST",
         headers: {
@@ -173,6 +198,27 @@ export default {
 };
 </script>
 <style scoped>
+.text-area-div{
+      width: 95%;
+    height: 17vw;
+    display: flex;
+    overflow-y: scroll;
+    padding-top: 0.5vw;
+    padding-bottom: 0.5vw;
+    border-top: 0.1vw #b5b3b3 solid;
+    border-bottom: 0.1vw #b4b4b4 solid;
+    gap: 1vw;
+    flex-direction: column;
+}
+.text-btn-adder{
+    display: flex;
+    justify-content: center;
+}
+.text-area-styel{
+  max-width: 100%;
+  min-height: 9vw;
+  max-height: 9vw;
+}
 .addBtn {
   margin: 10px 10px 10px 10px;
   text-align: center;
@@ -256,6 +302,7 @@ export default {
   height: 70%;
   border-radius: 1vw;
   justify-content: space-between;
+  align-items: center;
 }
 .delCourse {
   background: white;
@@ -284,9 +331,9 @@ export default {
 }
 .inputAdd {
   display: grid;
-  grid-template-columns: 9% 30%;
+  grid-template-columns: 10% 80%;
   justify-content: center;
-  gap: 1vw;
+  gap: 3vw;
   align-items: center;
   font-family: "Inter Regular";
   font-size: 0.9vw;

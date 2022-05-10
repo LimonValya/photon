@@ -1,57 +1,100 @@
 <template lang="pug">
 div.MainFrame
-  span.TitleLesson Курс: {{course.name}}
-  div.MainFrameLesson
-    div.lessonFrame
-        span.lessonName {{lesson.lessonName}}
-        div.lessonFrameText
-            p.LessonText {{lesson.text}}
-    div.lessonFrame2.lessonFrame 
-      div.lessonFrameImg
-      img(:src="require(`@/assets/${lesson.lessonName}.jpg`)").lessonImg
-  div.lessonFrame3
-    span.TitleComments Комментарии
-    textarea.inputStyle(type="text" v-model="lesson.comments.text")
-    div.CommentsFrame
-    span.NameComments {{lesson.comments.username}}
-    text.commentsText {{lesson.comments.text}}
-
-
-
+  div(v-for="(item, mainindex) in lesson")
+    div.MainFrameLesson
+      div.lessonFrame
+          span.lessonName {{item.lessonName}}
+          div.lessonFrameText(v-for="(item, textindex) in item.text")
+              p.LessonText {{item}}
+              div.lessonFrameImg
+                img(:src="`http://localhost:3001/uploads/${lesson[mainindex].img[textindex].filename}`").lessonImg
+    div.lessonFrame3
+      div.CommentsFrame
+      div(v-for="(item, index) in item.comments")
+        span.NameComments {{item.username}}
+        text.commentsText {{item.text}}
+      div.comment-flex
+        textarea(type="text" v-model="text").text-area
+        div.btn-flex
+          button.btnSignUp(@click="postComment(lesson[mainindex]._id)") Добавить комментарий
 </template>
 <script>
 import {mapState} from "vuex"
 export default {
   data(){
     return {
-      lesson: {
-        lessonName:"",
-        text: [],
-        img: [],
-        comments: [
-        { username:"", 
-        text:"" }
-    ],
-      }
-      
+      lesson: {},
+      addComment: "",
+      text: ""
     }
   },computed: {
     ...mapState({
       token: (state) => state.auth.token,
     }),
   },
+  methods: {
+    async postComment(id){
+      const response = await fetch("auth/addcoment", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+        body: JSON.stringify({
+          lessonID: id,
+          username: this.profileName,
+          text: this.text
+        })
+      });
+    },
+    async getlesson(){
+      const response = await fetch("auth/getlessons", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${this.token}`,
+        },
+      });
+      const json = await response.json()
+      this.lesson = json
+    }
+  },
+  mounted(){
+    this.getlesson()
+  },
+  computed: {
+    ...mapState({
+      token: (state) => state.auth.token,
+      profileName: (state) => state.auth.profileName
+    }),
+  },
 }
 </script>
 <style scoped>
+.text-area{
+  max-width: 100%;
+  font-family: "Inter Medium";
+  font-size: 1vw;
+  font-style: normal;
+}
+.btn-flex{
+  display: flex;
+  justify-content: flex-end;
+}
+.comment-flex{
+  display: flex;
+  flex-direction: column;
+  gap: 1vw;
+}
 .btnSignUp {
-  margin: 10px 17px 0px 17px;
   border: none;
   padding: 0.8vw;
+  width: 40%;
   padding-left: 1vw;
   padding-right: 1vw;
   border-radius: 10px;
   background: #214CCF;
-  color: white;
+  color: rgb(245, 245, 245);
   font-size: clamp(14px, 1vw, 98px);
   font-family: "Inter Regular";
   font-style: normal;
@@ -62,6 +105,8 @@ export default {
   width: auto;
   flex-direction: column;
   display: flex;
+  font-family: "Inter Medium";
+  font-size: 1vw;
   padding-left: 1%;
 }
 .NameComments{
@@ -107,7 +152,7 @@ export default {
 .lessonImg {
   width: 34vw;
   flex-direction: column;
-  padding: 4%;
+  padding: 1%;
 }
 .commentsName{
   font-family: "Inter Regular";
@@ -129,7 +174,7 @@ export default {
   padding: 3%;
 }
 .lessonFrameText {
-  width: auto;
+  width: 90%;
   flex-direction: column;
   display: flex;
 }
@@ -153,15 +198,17 @@ export default {
   flex-direction: column;
   display: flex;
   align-items: center;
+  width: 100%;
 }
 .lessonFrame3 {
   flex-direction: column;
   display: flex;
-  height: 100vh;
+  margin: 2vw;
+  gap: 2vw;
 }
 .LessonText {
   font-family: "Inter Regular";
-  color: white;
+  color: rgb(0, 0, 0);
   font-size: 1vw;
   font-family: "Inter Regular";
   font-style: normal;

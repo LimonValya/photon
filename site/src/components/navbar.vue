@@ -5,14 +5,14 @@ div.MainFrame
         div.btnMain(v-if="adminBut== false" roles="USER")
         button.btnMain(v-else="adminBut== true" roles="ADMIN" @click="this.$router.push('/Admin')") Администратор
         button.btnMain(@click="this.$router.push('/course')")  Курсы
-        button(@click="goAuth()").btnSignUp Вход
+        button(@click="goAuth()" v-if="authed == false").btnSignUp Вход
+        button.btnSignUp(@click="exitMethod()" v-if="authed == true") Выход  
 authModal(v-show="authmodal == true" @authmodal="goAuth()").authcomp
         div.lkOutDiv
          span(v-show="authed == true").lkStyle {{profileName}}
-        button.lkOut(@click="exitMethod()") Выход
-             
 </template>
 <script>
+import { mapState } from "vuex";
 import authModal from "@/components/authcomponent.vue"
 export default {
     data(){
@@ -35,7 +35,12 @@ export default {
     },
     components: {
         authModal
-    }
+    },
+    computed: {
+    ...mapState({
+      authed: (state) => state.auth.authed,
+    }),
+  },
 }
 </script>
 <style lang="scss" scoped>
