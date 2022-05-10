@@ -2,7 +2,7 @@
 div.MainFrame
     div.imageFrame
      img(src="@/assets/image/573.jpg").imageBoss
-     span.textBoss Photon- освещай счастливые мгновения!
+     span.textBoss Photon - освещай счастливые мгновения!
     div.FrameSchool
      span.TitleSchool О школе
     div.FrameSchoolColums
@@ -11,17 +11,16 @@ div.MainFrame
        | Photon – новая школа фотографии для всех. 
        | Мы поможем вам показать красоту мира правильно! 
        | Проходите бесплатные уроки по разным направлениям фотографии в любое время и из любого города. 
-    div.FrameCourse
+    div.FrameSchool
      span.TitleSchool Курсы
-     div.FrameCourse
-     span.TitleCourse Основы фотографии
-      div.FrameCourseColums
-       img(src="@/assets/image/14.jpg").imgBabyCourse
-       p.School
-         |Главное что нужно знать начинающему фотографу.
-         |Не знаете, что такое диафрагма и баланс белого?
-         |Проблемы с встроенной вспышкой? Как правильно выстроить композицию? Тогда вам сюда!
-       button(@click="this.$router.push('/course')").btnSignUp Читать далее
+    div.FrameSchoolColums
+      img(src="@/assets/image/14.jpg").imageSchool
+      p.School
+       |Вы тот самый человек, который за полное погружение в изучаемую тему?
+       |Не ищете лёгких путей и моментальных решений на пути к фотошедеврам? 
+       |Тогда программы школы Photon - ваш выбор.
+       |В каждой объединены несколько популярных курсов разного уровня сложности.
+      button(@click="this.$router.push('/course')").btnSignUp Читать далее
        
 </template>
 

@@ -4,7 +4,7 @@ div.MainFrame
     div.menuGroup <!-- -->
         div.btnMain(v-if="adminBut== false" roles="USER")
         button.btnMain(v-else="adminBut== true" roles="ADMIN" @click="this.$router.push('/Admin')") Администратор
-        button.btnMain Курсы
+        button.btnMain(@click="this.$router.push('/course')")  Курсы
         button(@click="goAuth()").btnSignUp Вход
 authModal(v-show="authmodal == true" @authmodal="goAuth()").authcomp
         div.lkOutDiv
